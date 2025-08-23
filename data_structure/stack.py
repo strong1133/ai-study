@@ -16,7 +16,7 @@ class Stack:
         return self.stack[-1]
 
     def isEmpty(self):
-        return len(self.stack) == 0   
+        return len(self.stack) == 0
 
 
 stack = Stack()
