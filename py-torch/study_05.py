@@ -46,20 +46,29 @@ transform_test = transforms.Compose([
     )
 ])
 
-train_dataset = datasets.ImageFolder(
-    root='./data/weather_dataset/train/',
-    transform=transform_train
-)
-dataset_size = len(train_dataset)
-train_size = int(0.8 * dataset_size)
-val_size = dataset_size - train_size
+# PyTorch에서 데이터셋을 불러오고, 학습/검증/테스트용 DataLoader를 만드는 과정.
 
-train_dataset, val_dataset = random_split(train_dataset, [train_size, val_size])
+
+train_dataset = datasets.ImageFolder(
+    root='./data/weather_dataset/train/', # 이미지를 불러와 라벨링.
+    transform=transform_train
+) # transform=transform_train: 불러온 이미지에 Resize + Flip + ToTensor + Normalize 같은 변환 적용
+
+# 데이터셋 크기 계산 및 분할
+dataset_size = len(train_dataset) # 전체 train 데이터 개수
+train_size = int(0.8 * dataset_size) # 80%를 학습(train)용으로
+val_size = dataset_size - train_size # 나머지 20%를 검증(validation)용
+
+train_dataset, val_dataset = random_split(train_dataset, [train_size, val_size]) # 학습용과 검증용을 랜덤하게 분할
 test_dataset = datasets.ImageFolder(
     root='./data/weather_dataset/test/',
     transform=transform_test
 )
 
+# DataLoader 생성
+# batch_size=64: 데이터를 64개씩 묶어서 한 번에 학습/평가.
+# shuffle=True (train만): 학습용 데이터는 매 epoch 마다 섞어서 사용 → 과적합 방지 & 일반화 성능 향상.
+# shuffle=False (val, test): 검증/테스트는 성능 평가가 목적이므로 순서를 섞지 않음.
 train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
 val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size=64, shuffle=False)
 test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=64, shuffle=False)
