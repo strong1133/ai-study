@@ -1,2 +1,3 @@
 my-first-agent/.env
 neww-agent-ai/.env
+*.pyc
