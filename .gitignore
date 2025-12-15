@@ -1,3 +1,5 @@
 my-first-agent/.env
 neww-agent-ai/.env
 *.pyc
+chatgpt-clone/.env
+chatgpt-clone/uv.lock
