@@ -3,3 +3,5 @@ neww-agent-ai/.env
 *.pyc
 chatgpt-clone/.env
 chatgpt-clone/uv.lock
+langchain-basics/.env
+*.lock
