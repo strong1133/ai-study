@@ -5,3 +5,4 @@ chatgpt-clone/.env
 chatgpt-clone/uv.lock
 langchain-basics/.env
 *.lock
+inflearn-llm-app/.env
